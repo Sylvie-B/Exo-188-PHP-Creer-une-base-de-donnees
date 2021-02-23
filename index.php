@@ -17,19 +17,22 @@
  * Théorie :
  * -----------
  * En SQL, l'instruction DROP DATABASE nom_de_ma_table permet de supprimer une base de données.
- * Dans la réalité, vous n'aurez que très peu d'occasions de vous en servir directement depuis PHP mais retenez la quand même, elle peut être utile dans le cadre de tests.
+ * Dans la réalité, vous n'aurez que très peu d'occasions de vous en servir directement depuis PHP mais retenez la quand même,
+ * elle peut être utile dans le cadre de tests.
  */
 
 // TODO Votre code ici bas.
+$server = 'localhost';
+$user = 'root';
+$password = '';
 
 try {
-    $maConnexion = ........
+    $maConnexion = new PDO("mysql:host=$server;charset=utf8", $user, $password);
+    $maConnexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $request = "
-        Ma super requête SQL pour créer une base de données.
-    ";
+    $request = "CREATE DATABASE intro_sql";
 
-    $maConnexion->une super méthode pour exécuter ma requete
+    $maConnexion->exec($request);
 
     echo "La base de données intro_sql a bien été créée.";
 }
@@ -37,15 +40,13 @@ catch (PDOException $exception) {
     echo $exception->getMessage();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+//try {
+//    $maConnexion = new PDO("mysql:host=$server;charset=utf8", $user, $password);
+//    $remove = "DROP DATABASE intro_sql";
+//    $maConnexion->exec($remove);
+//
+//    echo "base de données supprimée";
+//}
+//catch (PDOException $exception){
+//    echo $exception->getMessage();
+//}
